@@ -188,3 +188,60 @@ footer p {
     margin-top: 0.5rem;
   }
 }
+
+@media (max-width: 768px) {
+  form input[type="text"],
+  form input[type="password"] {
+    max-width: 100%; 
+  }
+
+  header .row {
+    text-align: center; 
+  }
+
+  .btn {
+    margin-top: 0.5rem; 
+  }
+
+
+  .card-body {
+    padding: 1rem; 
+  }
+
+
+  .img-custom {
+    height: 200px; 
+  }
+
+  .carousel-container,
+  .map-container {
+    max-width: 100%; 
+  }
+
+  .password-reset-container {
+    padding: 20px; 
+  }
+
+  footer {
+    font-size: 0.875rem; 
+  }
+}
+
+
+@media (max-width: 480px) {
+  header img {
+    max-height: 50px; 
+  }
+
+  .card img {
+    height: 200px; 
+  }
+
+  .password-reset-container {
+    padding: 15px; 
+  }
+
+  .map-container iframe {
+    height: 250px; 
+  }
+}

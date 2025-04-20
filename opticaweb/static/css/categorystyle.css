@@ -5,39 +5,39 @@
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #9b9595;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
 }
 
+
 header {
-  background-color: #333;
+  background-color: #222;
   color: white;
-  padding: 20px;
+  padding: 30px 20px;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   letter-spacing: 2px;
+  margin-bottom: 10px;
 }
 
 header nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-}
-
-header nav ul li {
-  margin: 0 15px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 header nav ul li a {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   transition: color 0.3s ease;
 }
@@ -46,50 +46,60 @@ header nav ul li a:hover {
   color: #f7b500;
 }
 
+
 main {
-  padding: 40px 15px;
-  position: relative;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 main h2 {
-  font-size: 2rem;
+  font-size: 2.2rem;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  color: #222;
 }
 
+
 .Lentes {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
   margin: 20px auto;
-  max-width: 1200px;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
-  flex: 1 1 30%;
+  flex: 1 1 300px;
+  transition: transform 0.3s ease;
+}
+
+.Lentes:hover {
+  transform: scale(1.02);
 }
 
 .Lentes img {
-  width: 80%;
+  width: 100%;
   max-width: 250px;
   border-radius: 8px;
   margin-bottom: 20px;
+  object-fit: contain;
 }
 
 .Lentes h3 {
-  font-size: 1.8rem;
-  color: #333;
+  font-size: 1.6rem;
+  color: #222;
   margin-bottom: 10px;
 }
 
 .Lentes p {
   font-size: 1rem;
-  color: #666;
+  color: #555;
   margin-bottom: 15px;
 }
 
 .Lentes strong {
-  color: #333;
+  color: #000;
 }
+
 
 .quantity-container {
   margin-bottom: 20px;
@@ -98,60 +108,59 @@ main h2 {
 .quantity-container select {
   padding: 10px;
   font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  width: 60px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  width: 70px;
+  background-color: #fafafa;
   text-align: center;
-  background-color: #f7f7f7;
 }
+
 
 .payment-btn {
   background-color: #f7b500;
   color: white;
-  padding: 12px 20px;
-  font-size: 1.2rem;
+  padding: 12px 25px;
+  font-size: 1.1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .payment-btn:hover {
   background-color: #d69b00;
+  transform: translateY(-2px);
 }
 
-.video-publicidad {
-  width: 100%;
-  height: 200px; /* Ajusta el tamaño del video según lo desees */
-  object-fit: cover;
-  margin-top: 20px; /* Esto coloca un espacio entre el título y el video */
-}
-.banner-left {
-  position: relative;
-  z-index: 1;
-}
 
 .banner-left video {
-  height: 300px; 
-  object-fit: cover;
   width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 30px;
 }
+
 
 .row.g-4 {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 20px;
 }
 
-.col-md-8 {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+
+.col-md-4 {
+  flex: 1 1 30%; 
+  max-width: 30%;
 }
 
-.card-img-top {
-  position: relative;
-  z-index: 2;
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex: 1 1 100%; 
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -161,16 +170,11 @@ main h2 {
 
   header nav ul {
     flex-direction: column;
-    margin-top: 20px;
-  }
-
-  header nav ul li {
-    margin: 10px 0;
+    gap: 10px;
   }
 
   .Lentes {
     width: 90%;
-    padding: 15px;
   }
 
   .Lentes img {
@@ -178,12 +182,10 @@ main h2 {
   }
 
   .quantity-container select {
-    width: 50px;
+    width: 60px;
   }
 
   .banner-left video {
-    width: 100%;
     height: 200px;
   }
 }
-

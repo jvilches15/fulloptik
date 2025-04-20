@@ -13,7 +13,6 @@ from django.contrib.auth.hashers import make_password
 from .models import Comuna
 from .models import AdministracionUser
 from .models import Region, Comuna
-from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 from django.http import Http404
 from .models import Producto
@@ -23,6 +22,10 @@ from .models import Cita
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
+import re
+from django.core.exceptions import ValidationError
+from .forms import RestablecerContrasenaForm
+from .forms import CrearUsuarioForm
 
 
 def es_admin(user):
@@ -76,42 +79,38 @@ def admin_login(request):
 
 
 def crear_usuario(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        rut = request.POST.get('rut')
-        fecha_nacimiento = request.POST.get('date_of_birth')
-        direccion = request.POST.get('address')
-        region_id = request.POST.get('region')
-        comuna_id = request.POST.get('comuna')
-        imagen = request.FILES.get('image')
-     
-
-       
-        user = User.objects.create_user(
-            username=rut,
-            first_name=nombre,
-            password='temporal123'  
-        )
-
-       
-        UserProfile.objects.create(
-            user=user,
-            rut=rut,
-            date_of_birth=fecha_nacimiento,
-            address=direccion,
-            region_id=region_id,
-            comuna_id=comuna_id,
-            image=imagen,
-            
-        )
-
-        messages.success(request, "Usuario creado correctamente.")
-        return redirect('panel_administrador')
-
- 
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
+
+    if request.method == 'POST':
+        form = CrearUsuarioForm(request.POST, request.FILES, regiones=regiones, comunas=comunas)
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            user = User.objects.create_user(
+                username=cd['rut'],
+                first_name=cd['nombre'],
+                email=cd['email'],
+                password=cd['password']
+            )
+
+            UserProfile.objects.create(
+                user=user,
+                rut=cd['rut'],
+                date_of_birth=cd['date_of_birth'],
+                address=cd['address'],
+                region_id=cd['region'],
+                comuna_id=cd['comuna'],
+                image=cd['image']
+            )
+
+            messages.success(request, "Usuario creado correctamente.")
+            return redirect('panel_administrador')
+    else:
+        form = CrearUsuarioForm(regiones=regiones, comunas=comunas)
+
     return render(request, 'crear_usuario.html', {
+        'form': form,
         'regions': regiones,
         'comunas': comunas
     })
@@ -195,7 +194,7 @@ def registro(request):
         form = UserProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('perfil')
+            return redirect('login')
      else:
         form = UserProfileForm()
     
@@ -353,7 +352,5 @@ def eliminar_cita(request, cita_id):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
-
-
 
 # Create your views here.

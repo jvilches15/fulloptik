@@ -1,3 +1,10 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #9b9595;
+    color: #333;
+    line-height: 1.6;
+  }
+
 h2 {
     font-size: 24px;
     color: #007bff; 
@@ -43,3 +50,34 @@ button {
 button:hover {
     opacity: 0.9;
 }
+
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 20px; 
+    }
+
+    form {
+        width: 80%; 
+    }
+
+    button {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 18px; 
+    }
+
+    form {
+        width: 90%; 
+    }
+
+    button {
+        font-size: 12px; 
+        padding: 8px 12px; 
+    }
+}
+
